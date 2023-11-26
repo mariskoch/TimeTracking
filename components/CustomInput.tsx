@@ -1,7 +1,7 @@
 interface InputFieldProps {
     label: string;
     placeholder: string;
-    type?: "text" | "password" | "email" | "number";
+    type?: "text" | "password" | "email" | "number" | "month" | "time";
 }
 
 const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "text" }) => {
@@ -15,7 +15,7 @@ const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "te
                 type={type}
                 id={label}
                 placeholder={placeholder}
-                name={label.replace(' ', '_')}
+                name={label.replaceAll(' ', '_')}
             />
         </div>
     );

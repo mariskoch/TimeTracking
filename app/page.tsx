@@ -2,6 +2,7 @@
 
 import CustomInput from '@/components/CustomInput';
 import Feedback, { FeedbackProps } from '@/components/Feedback';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Home() {
@@ -59,8 +60,10 @@ export default function Home() {
         {feedback && (
           <Feedback message={feedback.message} state={feedback.state}></Feedback>
         )}
+        <div className='w-full flex flex-col items-center justify-center'>
+          <Link href='/export' className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center'>Go to Exports</Link>
+        </div>
       </div>
-
     </div>
   )
 }
