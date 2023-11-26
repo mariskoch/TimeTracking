@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  postgresql:
+    image: postgres:16.1
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=timetracking
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:8.0
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=dev@dev.de
+      - PGADMIN_DEFAULT_PASSWORD=12345
+    ports:
+      - "8000:80"
