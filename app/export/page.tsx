@@ -24,7 +24,7 @@ const Export = () => {
     }
 
     return (
-        <div className='flex flex-col h-screen'>
+        <div className='flex flex-col h-screen items-center'>
             <div className='w-full sm:w-96 px-6 sm:px-0'>
                 <div className='flex justify-center items-center text-4xl mt-12 mb-3 w-full'>
                     Exports

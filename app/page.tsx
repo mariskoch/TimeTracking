@@ -43,9 +43,9 @@ export default function Home() {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
+    <div className='flex flex-col items-center h-screen'>
       <div className='w-full sm:w-96 px-6 sm:px-0'>
-        <div className='flex items-center justify-center text-4xl mb-3 w-full'>
+        <div className='flex items-center justify-center text-4xl mt-12 mb-3 w-full'>
           Time Tracking
         </div>
         <div className='w-full'>
