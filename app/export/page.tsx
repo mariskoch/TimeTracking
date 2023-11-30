@@ -7,13 +7,18 @@ const Export = () => {
     function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const data = Object.fromEntries(new FormData(event.target as HTMLFormElement));
+        const yearAndMonth = (data.Year_and_Month as string).split("-");
+        const formattedData = {
+            year: yearAndMonth[0],
+            month: yearAndMonth[1]
+        }
 
         fetch('/api/export', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(formattedData)
         })
             .then(data => {
 

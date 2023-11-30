@@ -1,36 +1,51 @@
-//import puppeteer from "puppeteer";
-import { renderToString } from 'react-dom/server';
-//import ExportTable from '@/components/ExportTable'
+import { prisma } from "@/client";
+import { getFirstDayOfMonth, getNumberOfDaysInMonth, getWeekdayOfDate } from "@/utils/DateUtils";
+import ExportTableBuilder from "@/utils/ExportTableBuilder";
+import ExportTableSchema from "@/utils/ExportTableSchema";
+import reactElementToJSXString from "react-element-to-jsx-string";
 
 export async function POST(request: Request) {
-    /*
-    const data = (await request.json()).Year_and_Month;
-    const [year, month] = data.split('-');
-    */
+    let { year: y, month: m }: { year: string, month: string } = await request.json();
+    const year = parseInt(y);
+    const month = parseInt(m);
+    const gte = getFirstDayOfMonth(year, month);
+    const lt = getFirstDayOfMonth(year, month + 1);
 
-    const htmlString: string = renderToString(<div>Hallo</div>);
-    //const htmlString: string = renderToString(<ExportTable firstName="Johanna" lastName="Scherer" year={2023} month={11}></ExportTable>);
-    /*
-    generatePDFfromHTML(htmlString, '/out.pdf')
-        .then(data => {
-            console.log('Generated PDF successfully');
-        })
-        .catch(err => {
-            console.log('An error occurred when creating the PDF')
+    const workTimeEntries = await prisma.workTimeEntry.findMany({
+        where: {
+            day: {
+                gte,
+                lt,
+            }
+        },
+        orderBy: {
+            day: "asc"
+        }
+    });
+
+    const daysInMonth = getNumberOfDaysInMonth(year, month);
+    const tableData: ExportTableSchema[] = [];
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayDate = new Date();
+        dayDate.setUTCFullYear(year);
+        dayDate.setUTCMonth(month - 1);
+        dayDate.setUTCDate(day);
+        const weekday = getWeekdayOfDate(year, month, day);
+        const startTime = new Date(2023, 11, day, 8, 0);
+        const endTime = new Date(2023, 11, day, 18, 15);
+        const pauseDuration = new Date(2023, 11, day, 0, 30);
+        tableData.push({
+            day: dayDate,
+            weekday,
+            startTime,
+            endTime,
+            pauseDuration
         });
-    */
-    console.log(htmlString);
-    return new Response(null, {
+    }
+
+    const exportHTMLString = ExportTableBuilder.build('Johanna', 'Scherer', tableData);
+    
+    return new Response(reactElementToJSXString(exportHTMLString), {
         status: 200
     });
 }
-
-/*
-async function generatePDFfromHTML(htmlContent: string, outputPath: string): Promise<void> {
-    const browser = await puppeteer.launch({ headless: "new" });
-    const page = await browser.newPage();
-    await page.setContent(htmlContent);
-    await page.pdf({ path: outputPath, format: 'A4' });
-    await browser.close();
-}
-*/
