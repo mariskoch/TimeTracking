@@ -2,12 +2,16 @@ import { prisma } from "@/client";
 import { getFirstDayOfMonth, getNumberOfDaysInMonth, getWeekdayOfDate } from "@/utils/DateUtils";
 import ExportTableBuilder from "@/utils/ExportTableBuilder";
 import ExportTableSchema from "@/utils/ExportTableSchema";
+import { NextRequest } from "next/server";
 import reactElementToJSXString from "react-element-to-jsx-string";
 
-export async function POST(request: Request) {
-    let { year: y, month: m }: { year: string, month: string } = await request.json();
-    const year = parseInt(y);
-    const month = parseInt(m);
+export async function GET(request: NextRequest) {
+    const searchParams = request.nextUrl.searchParams;
+    const y = searchParams.get('year');
+    const m = searchParams.get('month');
+    const year = y ? parseInt(y) : 1970;
+    const month = m ? parseInt(m) : 0;
+
     const gte = getFirstDayOfMonth(year, month);
     const lt = getFirstDayOfMonth(year, month + 1);
 

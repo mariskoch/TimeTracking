@@ -1,30 +1,30 @@
 'use client';
 
+import ExportTableSchema from '@/utils/ExportTableSchema';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const View = () => {
-    const [html, setHtml] = useState<string>('');
+    const [content, setContent] = useState<ExportTableSchema[]>();
 
-    const body = {
-        year: '2023',
-        month: '11'
-    }
+    const searchParams = useSearchParams();
+    const year = searchParams.get('year') ?? '1970';
+    const month = searchParams.get('month') ?? '0';
+    const body = JSON.stringify({ year, month, });
 
     useEffect(() => {
-        const set = async () => {
-            setHtml(await (await fetch('/api/export', {
-                method: 'POST',
-                body: JSON.stringify(body)
-            })).text());
+        const fetchContent = async () => {
+            setContent(await (await fetch('/api/export', {
+                method: 'GET',
+                body,
+            })).json());
         };
-        set();
+        fetchContent();
     }, []);
 
     return (
         <>
-            {html && (
-                <div dangerouslySetInnerHTML={{ __html: html }}></div>
-            )}
+
         </>
     );
 }
