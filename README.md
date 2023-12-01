@@ -5,3 +5,4 @@
 - prisma + postgresql: [https://www.prisma.io/docs/concepts/database-connectors/postgresql](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
 - html to pdf packages: [https://apitemplate.io/blog/how-to-convert-html-to-pdf-using-node-js/](https://apitemplate.io/blog/how-to-convert-html-to-pdf-using-node-js/)
 - url and search params in ssr page: [https://nextjs.org/docs/app/api-reference/file-conventions/page](https://nextjs.org/docs/app/api-reference/file-conventions/page)
+- redirecting with router [https://www.turing.com/kb/nextjs-redirect](https://www.turing.com/kb/nextjs-redirect)
