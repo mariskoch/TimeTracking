@@ -2,9 +2,10 @@ interface InputFieldProps {
     label: string;
     placeholder: string;
     type?: "text" | "password" | "email" | "number" | "month" | "time";
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "text" }) => {
+const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "text", onChange = () => {} }) => {
     return (
         <div className='mt-5 w-full flex justify-center flex-col'>
             <label htmlFor={label} className='font-medium mb-1'>
@@ -16,6 +17,7 @@ const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "te
                 id={label}
                 placeholder={placeholder}
                 name={label.replaceAll(' ', '_')}
+                onChange={onChange}
             />
         </div>
     );

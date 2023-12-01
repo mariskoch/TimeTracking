@@ -104,8 +104,13 @@ export function getMonthName(month: number): Month {
 
 export function areDatesOnSameDay(datum1: Date, datum2: Date): boolean {
     return (
-      datum1.getUTCFullYear() === datum2.getUTCFullYear() &&
-      datum1.getUTCMonth() === datum2.getUTCMonth() &&
-      datum1.getUTCDate() === datum2.getUTCDate()
+        datum1.getUTCFullYear() === datum2.getUTCFullYear() &&
+        datum1.getUTCMonth() === datum2.getUTCMonth() &&
+        datum1.getUTCDate() === datum2.getUTCDate()
     );
+}
+
+export function isValidYearMonthFormat(input: string): boolean {
+    const regex = /^(\d{4})-(0[1-9]|1[0-2])$/;
+    return regex.test(input);
   }
