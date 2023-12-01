@@ -18,28 +18,31 @@ export function getFirstDayOfMonth(year: number, month: number): Date {
 }
 
 export function getWeekdayOfDate(year: number, month: number, day: number): Weekday {
-    const date = new Date(year, month - 1, day);
+    const date = new Date();
+    date.setUTCFullYear(year);
+    date.setUTCMonth(month - 1);
+    date.setUTCDate(day);
     const dayIndex = date.getDay();
     switch (dayIndex) {
-        case 0:
+        case 1:
             return Weekday.Monday;
             break;
-        case 1:
+        case 2:
             return Weekday.Tuesday;
             break;
-        case 2:
+        case 3:
             return Weekday.Thursday;
             break;
-        case 3:
+        case 4:
             return Weekday.Wednesday
             break;
-        case 4:
+        case 5:
             return Weekday.Friday;
             break;
-        case 5:
+        case 6:
             return Weekday.Saturday;
             break;
-        case 6:
+        case 0:
             return Weekday.Sunday;
             break;
         default:
@@ -48,7 +51,7 @@ export function getWeekdayOfDate(year: number, month: number, day: number): Week
     }
 }
 
-export function TimeHHMM(date: Date): string {
+export function TimeHoursMinutes(date: Date): string {
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;

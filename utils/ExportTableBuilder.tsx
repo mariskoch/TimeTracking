@@ -1,4 +1,4 @@
-import { TimeHHMM as TimeHoursMinutes } from "./DateUtils";
+import { TimeHoursMinutes as TimeHoursMinutes } from "./DateUtils";
 import ExportTableSchema from "./ExportTableSchema";
 
 export default class ExportTableBuilder {

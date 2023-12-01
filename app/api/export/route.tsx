@@ -1,9 +1,7 @@
 import { prisma } from "@/client";
 import { getFirstDayOfMonth, getNumberOfDaysInMonth, getWeekdayOfDate } from "@/utils/DateUtils";
-import ExportTableBuilder from "@/utils/ExportTableBuilder";
 import ExportTableSchema from "@/utils/ExportTableSchema";
 import { NextRequest } from "next/server";
-import reactElementToJSXString from "react-element-to-jsx-string";
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
@@ -46,10 +44,5 @@ export async function GET(request: NextRequest) {
             pauseDuration
         });
     }
-
-    const exportHTMLString = ExportTableBuilder.build('Johanna', 'Scherer', tableData);
-    
-    return new Response(reactElementToJSXString(exportHTMLString), {
-        status: 200
-    });
+    return Response.json(tableData);
 }
