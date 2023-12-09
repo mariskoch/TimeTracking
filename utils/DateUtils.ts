@@ -113,4 +113,12 @@ export function areDatesOnSameDay(datum1: Date, datum2: Date): boolean {
 export function isValidYearMonthFormat(input: string): boolean {
     const regex = /^(\d{4})-(0[1-9]|1[0-2])$/;
     return regex.test(input);
-  }
+}
+
+export function getDateAsString(): string {
+    const date = new Date;
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
+}

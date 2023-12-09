@@ -1,11 +1,17 @@
 import ExportTableSchema from '@/utils/ExportTableSchema';
-import { useSearchParams } from 'next/navigation';
-import { TimeHoursMinutes, areDatesOnSameDay, getFirstDayOfMonth, getMonthName, getNumberOfDaysInMonth, getWeekdayOfDate } from '@/utils/DateUtils';
-import { prisma } from '@/client';
+import {
+    TimeHoursMinutes,
+    areDatesOnSameDay,
+    getFirstDayOfMonth,
+    getMonthName,
+    getNumberOfDaysInMonth,
+    getWeekdayOfDate
+} from '@/utils/DateUtils';
+import {prisma} from '@/client';
 
 const View = async ({
-    searchParams,
-}: {
+                        searchParams,
+                    }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
     const yearParam = searchParams.year;
@@ -77,26 +83,26 @@ const View = async ({
                 <div className='mx-4'>
                     <table className='w-full text-left text-sm font-light'>
                         <thead className='border-b font-medium'>
-                            <tr>
-                                <th scope='col' className='px-6 py-3'>Date</th>
-                                <th scope='col' className='px-6 py-3'>Weekday</th>
-                                <th scope='col' className='px-6 py-3'>Start Time</th>
-                                <th scope='col' className='px-6 py-3'>End Time</th>
-                                <th scope='col' className='px-6 py-3'>Pause Duration</th>
-                            </tr>
+                        <tr>
+                            <th scope='col' className='px-6 py-3'>Date</th>
+                            <th scope='col' className='px-6 py-3'>Weekday</th>
+                            <th scope='col' className='px-6 py-3'>Start Time</th>
+                            <th scope='col' className='px-6 py-3'>End Time</th>
+                            <th scope='col' className='px-6 py-3'>Pause Duration</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {tableData.map((rowData, index) => {
-                                return (
-                                    <tr key={index} className='border-b'>
-                                        <td className='whitespace-nowrap px-6 py-1'>{rowData.day.getDate()}</td>
-                                        <td className='whitespace-nowrap px-6 py-1'>{rowData.weekday}</td>
-                                        <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.startTime)}</td>
-                                        <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.endTime)}</td>
-                                        <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.pauseDuration)}</td>
-                                    </tr>
-                                );
-                            })}
+                        {tableData.map((rowData, index) => {
+                            return (
+                                <tr key={index} className='border-b'>
+                                    <td className='whitespace-nowrap px-6 py-1'>{rowData.day.getDate()}</td>
+                                    <td className='whitespace-nowrap px-6 py-1'>{rowData.weekday}</td>
+                                    <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.startTime)}</td>
+                                    <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.endTime)}</td>
+                                    <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.pauseDuration)}</td>
+                                </tr>
+                            );
+                        })}
                         </tbody>
                     </table>
                 </div>
