@@ -7,9 +7,10 @@ interface InputFieldProps {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
     onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void,
     value?: string;
+    inputMode?: "numeric" | "decimal" | "tel" | "search" | "email" | "url" | "text";
 }
 
-const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "text", onChange = () => {}, onBlur = () => {}, value}) => {
+const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "text", onChange, onBlur, value, inputMode}) => {
     return (
         <div className='mt-5 w-full flex justify-center flex-col'>
             <label htmlFor={label} className='font-medium mb-1'>
@@ -23,7 +24,8 @@ const CustomInput: React.FC<InputFieldProps> = ({ label, placeholder, type = "te
                 name={label.replaceAll(' ', '_')}
                 onChange={onChange}
                 onBlur={onBlur}
-                value={value}
+                defaultValue={value}
+                inputMode={inputMode}
             />
         </div>
     );

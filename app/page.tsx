@@ -67,11 +67,11 @@ export default function Home() {
                     <form className='w-full' onSubmit={handleSubmit}>
                         <CustomInput label='Date' placeholder='DD.MM.YYYY' value={getDateAsString()}></CustomInput>
                         <CustomInput label='Start Time' placeholder='HH:MM' onChange={onlyNumbers}
-                                     onBlur={handleBlur}></CustomInput>
+                                     onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
                         <CustomInput label='End Time' placeholder='HH:MM' onChange={onlyNumbers}
-                                     onBlur={handleBlur}></CustomInput>
+                                     onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
                         <CustomInput label='Pause Duration' placeholder='HH:MM' onChange={onlyNumbers}
-                                     onBlur={handleBlur}></CustomInput>
+                                     onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
                         <button type='submit' className='bg-blue-600 text-white w-full mt-6 py-2 rounded-md'>Submit
                         </button>
                     </form>
