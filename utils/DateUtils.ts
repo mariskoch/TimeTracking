@@ -122,3 +122,13 @@ export function getDateAsString(): string {
     const year = date.getFullYear();
     return `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
 }
+
+export function calculateWorkTime(start: Date, end: Date, pause: Date): string {
+    const startTimeInMilliseconds = start.getUTCHours() * 3600000 + start.getUTCMinutes() * 60000;
+    const endTimeInMilliseconds = end.getUTCHours() * 3600000 + end.getUTCMinutes() * 60000;
+    const pauseTimeInMilliseconds = pause.getUTCHours() * 3600000 + pause.getUTCMinutes() * 60000;
+    const timeInMilliseconds = endTimeInMilliseconds - startTimeInMilliseconds - pauseTimeInMilliseconds;
+    const hours = Math.floor(timeInMilliseconds / 3600000);
+    const minutes = Math.floor((timeInMilliseconds - hours * 3600000) / 60000);
+    return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+}
