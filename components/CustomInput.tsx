@@ -3,7 +3,7 @@ import React from "react";
 interface InputFieldProps {
     label: string;
     placeholder: string;
-    type?: "text" | "password" | "email" | "number" | "month" | "time";
+    type?: "text" | "password" | "email" | "number" | "month" | "time" | "date";
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
     onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void,
     value?: string;

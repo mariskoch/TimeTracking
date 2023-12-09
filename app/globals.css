@@ -9,5 +9,10 @@ body {
 
 input[type="month"] {
   -webkit-appearance: none;
-  min-height: 2.7em;
+  height: 46px;
+}
+
+input[type="date"] {
+  -webkit-appearance: none;
+  height: 46px;
 }

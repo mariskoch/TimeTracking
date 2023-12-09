@@ -4,7 +4,7 @@ import CustomInput from '@/components/CustomInput';
 import Feedback, {FeedbackProps} from '@/components/Feedback';
 import Link from 'next/link';
 import React, {useState} from 'react';
-import {getDateAsString} from "@/utils/DateUtils";
+import {getDateAsString, transformDataFormat} from "@/utils/DateUtils";
 import {formatTime} from "@/utils/TimeUtils";
 
 export default function Home() {
@@ -20,6 +20,8 @@ export default function Home() {
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const data = Object.fromEntries(new FormData(event.target as HTMLFormElement));
+
+        data['Date'] = transformDataFormat(data['Date'] as string);
 
         fetch('/api/submit', {
             method: 'POST',
@@ -65,7 +67,7 @@ export default function Home() {
                 </div>
                 <div className='w-full'>
                     <form className='w-full' onSubmit={handleSubmit}>
-                        <CustomInput label='Date' placeholder='DD.MM.YYYY' value={getDateAsString()}></CustomInput>
+                        <CustomInput label='Date' placeholder='DD.MM.YYYY' value={getDateAsString()} type={"date"}></CustomInput>
                         <CustomInput label='Start Time' placeholder='HH:MM' onChange={onlyNumbers}
                                      onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
                         <CustomInput label='End Time' placeholder='HH:MM' onChange={onlyNumbers}
