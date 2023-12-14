@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import {options} from "@/app/api/auth/options";
+import {options} from "@/app/api/auth/[...nextauth]/options";
 
 /*
 declare module "next-auth" {

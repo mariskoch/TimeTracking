@@ -6,6 +6,7 @@ import Link from 'next/link';
 import React, {useState} from 'react';
 import {getDateAsString, transformDataFormat} from "@/utils/DateUtils";
 import {formatTime} from "@/utils/TimeUtils";
+import {signIn} from "next-auth/react";
 
 export default function Home() {
     const [feedback, setFeedback] = useState<FeedbackProps>();
@@ -67,7 +68,8 @@ export default function Home() {
                 </div>
                 <div className='w-full'>
                     <form className='w-full' onSubmit={handleSubmit}>
-                        <CustomInput label='Date' placeholder='DD.MM.YYYY' value={getDateAsString()} type={"date"}></CustomInput>
+                        <CustomInput label='Date' placeholder='DD.MM.YYYY' value={getDateAsString()}
+                                     type={"date"}></CustomInput>
                         <CustomInput label='Start Time' placeholder='HH:MM' onChange={onlyNumbers}
                                      onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
                         <CustomInput label='End Time' placeholder='HH:MM' onChange={onlyNumbers}
@@ -86,6 +88,9 @@ export default function Home() {
                           className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center'>Go to
                         Exports</Link>
                 </div>
+                <button className={'bg-red-800 text-white rounded-md w-full mt-5 py-2 flex justify-center'}
+                        onClick={() => signIn()}>Sign in
+                </button>
             </div>
         </div>
     )
