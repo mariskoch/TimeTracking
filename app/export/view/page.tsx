@@ -8,12 +8,16 @@ import {
     getWeekdayOfDate, calculateWorkTime
 } from '@/utils/DateUtils';
 import {prisma} from '@/client';
+import {getServerSession} from "next-auth";
+import {options} from "@/app/api/auth/[...nextauth]/options";
 
 const View = async ({
                         searchParams,
                     }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
+    const session = await getServerSession(options);
+
     const yearParam = searchParams.year;
     const year = Array.isArray(yearParam) ? parseInt(yearParam[0], 10) : parseInt(yearParam || '1970', 10);
 
