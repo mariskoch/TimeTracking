@@ -94,6 +94,10 @@ export default function Home() {
                 <button className={'bg-gray-800 text-white rounded-md w-full mt-5 py-2 flex justify-center'}
                         onClick={() => signOut({callbackUrl: '/'})}>Sign Out
                 </button>
+                <div className='w-full flex flex-col items-center justify-center'>
+                    <Link href='/register'
+                          className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center'>Register</Link>
+                </div>
             </div>
         </div>
     )

@@ -4,6 +4,9 @@ import {prisma} from "@/client";
 import bcrypt from "bcrypt";
 
 export const options: NextAuthOptions = {
+    pages: {
+        signIn: "/login",
+    },
     callbacks: {
         jwt({token, user}) {
             if (user) {
