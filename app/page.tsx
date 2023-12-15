@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React, {useState} from 'react';
 import {getDateAsString, transformDataFormat} from "@/utils/DateUtils";
 import {formatTime} from "@/utils/TimeUtils";
-import {signIn} from "next-auth/react";
+import {signIn, signOut} from "next-auth/react";
 
 export default function Home() {
     const [feedback, setFeedback] = useState<FeedbackProps>();
@@ -90,6 +90,9 @@ export default function Home() {
                 </div>
                 <button className={'bg-red-800 text-white rounded-md w-full mt-5 py-2 flex justify-center'}
                         onClick={() => signIn()}>Sign in
+                </button>
+                <button className={'bg-gray-800 text-white rounded-md w-full mt-5 py-2 flex justify-center'}
+                        onClick={() => signOut({callbackUrl: '/'})}>Sign Out
                 </button>
             </div>
         </div>
