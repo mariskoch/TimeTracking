@@ -27,10 +27,6 @@ const View = async ({
         redirect('/api/auth/signin?callbackUrl=%2Fexport%2Fview%3Fyear%3D2023%26month%3D12');
     }
 
-    console.log('SessionLogs:');
-    console.log(session);
-    console.log('\n');
-
     const yearParam = searchParams.year;
     const year = Array.isArray(yearParam) ? parseInt(yearParam[0], 10) : parseInt(yearParam || '1970', 10);
 
@@ -39,8 +35,8 @@ const View = async ({
 
     const monthName = getMonthName(month);
 
-    const firstName = 'Johanna';
-    const lastName = 'Scherer';
+    const firstName = session.user.firstName;
+    const lastName = session.user.lastName;
 
     const gte = getFirstDayOfMonth(year, month);
     const lt = getFirstDayOfMonth(year, month + 1);
@@ -50,7 +46,8 @@ const View = async ({
             day: {
                 gte,
                 lt,
-            }
+            },
+            userId: session.user.id
         },
         orderBy: {
             day: "asc"

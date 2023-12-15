@@ -12,12 +12,13 @@ datasource db {
 
 model WorkTimeEntry {
   id     String   @id @default(uuid())
-  day    DateTime @unique @db.Date
+  day    DateTime @db.Date
   start  DateTime @db.Time
   end    DateTime @db.Time
   pause  DateTime @db.Time
   user   User     @relation(fields: [userId], references: [id])
   userId String
+  @@unique([day, userId])
 }
 
 model User {
