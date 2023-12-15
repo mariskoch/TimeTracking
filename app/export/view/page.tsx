@@ -10,6 +10,7 @@ import {
 import {prisma} from '@/client';
 import {getServerSession} from "next-auth";
 import {options} from "@/app/api/auth/[...nextauth]/options";
+import {redirect} from "next/navigation";
 
 const View = async ({
                         searchParams,
@@ -17,6 +18,14 @@ const View = async ({
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
     const session = await getServerSession(options);
+
+    /**
+     * This is an example of how to secure a page for viewing only by users who are authenticated.
+     * If the user is not authenticated, redirect to the login page.
+     */
+    if (!session) {
+        redirect('/api/auth/signin?callbackUrl=%2Fexport%2Fview%3Fyear%3D2023%26month%3D12');
+    }
 
     const yearParam = searchParams.year;
     const year = Array.isArray(yearParam) ? parseInt(yearParam[0], 10) : parseInt(yearParam || '1970', 10);
