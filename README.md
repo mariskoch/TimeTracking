@@ -11,3 +11,4 @@
 - NextAuth Tutorial für role based access control: [https://www.youtube.com/watch?v=ay-atEUGIc4](https://www.youtube.com/watch?v=ay-atEUGIc4)
 - NextAuth Tutorial für role based access control: [https://www.youtube.com/watch?v=yCJH72nZ8DI](https://www.youtube.com/watch?v=yCJH72nZ8DI)
 - How to ignore a prisma field in the client: [https://www.prisma.io/docs/orm/reference/prisma-schema-reference#ignore](https://www.prisma.io/docs/orm/reference/prisma-schema-reference#ignore)
+- Caching in NextJS: [https://nextjs.org/docs/app/building-your-application/caching#opting-out-3](https://nextjs.org/docs/app/building-your-application/caching#opting-out-3)
