@@ -19,8 +19,6 @@ const View = async ({
 }) => {
     const session = await getServerSession(options);
 
-    console.log(session);
-
     /**
      * This is an example of how to secure a page for viewing only by users who are authenticated.
      * If the user is not authenticated, redirect to the login page.
