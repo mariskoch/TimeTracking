@@ -3,15 +3,17 @@
 import React, {useState} from "react";
 import CustomInput from "@/components/CustomInput";
 import {signIn} from "next-auth/react";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import Feedback, {FeedbackProps} from "@/components/Feedback";
 
 const loginPage = () => {
     const [feedback, setFeedback] = useState<FeedbackProps>();
+    const searchParams = useSearchParams();
     const router = useRouter();
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        router.refresh();
 
         const data = Object.fromEntries(new FormData(e.target as HTMLFormElement));
 
@@ -21,10 +23,8 @@ const loginPage = () => {
             redirect: false,
         })
             .then((res) => {
-                console.log(res);
                 if (res?.ok) {
-                    console.log('redirecting')
-                    router.push('/');
+                    router.push(searchParams.get('callbackUrl') || '/');
                 } else {
                     setFeedback({
                         state: 'Error',
