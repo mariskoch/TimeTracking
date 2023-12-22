@@ -5,6 +5,7 @@ import CustomInput from "@/components/CustomInput";
 import {signIn} from "next-auth/react";
 import {useRouter, useSearchParams} from "next/navigation";
 import Feedback, {FeedbackProps} from "@/components/Feedback";
+import Link from "next/link";
 
 const loginPage = () => {
     const [feedback, setFeedback] = useState<FeedbackProps>();
@@ -49,6 +50,9 @@ const loginPage = () => {
                 {feedback && (
                     <Feedback message={feedback.message} state={feedback.state}></Feedback>
                 )}
+                <div className={'flex items-center justify-center mt-3 text-gray-500'}>
+                    New here?<Link href={'/register'} className={'ml-1 underline'}>Create an Account</Link>
+                </div>
             </div>
         </div>
     )

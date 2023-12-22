@@ -3,6 +3,7 @@
 import React, {useState} from "react";
 import CustomInput from "@/components/CustomInput";
 import Feedback, {FeedbackProps} from "@/components/Feedback";
+import Link from "next/link";
 
 const exportPage = () => {
     const [feedback, setFeedback] = useState<FeedbackProps>();
@@ -99,6 +100,9 @@ const exportPage = () => {
                 {feedback && (
                     <Feedback message={feedback.message} state={feedback.state}></Feedback>
                 )}
+                <div className={'flex items-center justify-center mt-3 text-gray-500'}>
+                    Already have an account?<Link href={'/login'} className={'ml-1 underline'}>Login</Link>
+                </div>
             </div>
         </div>
     )
