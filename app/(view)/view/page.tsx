@@ -19,19 +19,19 @@ const View = async ({
 }) => {
     const session = await getServerSession(options);
 
-    /**
-     * This is an example of how to secure a page for viewing only by users who are authenticated.
-     * If the user is not authenticated, redirect to the login page.
-     */
-    if (!session) {
-        redirect('/login?callbackUrl=%2Fview%3Fyear%3D2023%26month%3D12');
-    }
-
     const yearParam = searchParams.year;
     const year = Array.isArray(yearParam) ? parseInt(yearParam[0], 10) : parseInt(yearParam || '1970', 10);
 
     const monthParam = searchParams.month;
     const month = Array.isArray(monthParam) ? parseInt(monthParam[0], 10) : parseInt(monthParam || '1', 10);
+
+    /**
+     * This is an example of how to secure a page for viewing only by users who are authenticated.
+     * If the user is not authenticated, redirect to the login page.
+     */
+    if (!session) {
+        redirect(`/login?callbackUrl=%2Fview%3Fyear%3D${year}%26month%3D${month}`);
+    }
 
     const monthName = getMonthName(month);
 
