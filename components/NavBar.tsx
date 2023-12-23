@@ -7,7 +7,6 @@ import {signOut, useSession} from "next-auth/react";
 
 const NavBar: React.FC = () => {
     const session = useSession();
-    console.log(session)
 
     return (
         <div className={'flex h-[4em] bg-gray-300 justify-center'}>
@@ -20,7 +19,7 @@ const NavBar: React.FC = () => {
                     </div>
                     <div className={'flex ml-auto mr-6 items-center'}>
                         {session.status === 'authenticated' ? (
-                            <button className={'bg-gray-800 text-white rounded-md w-full mt-5 py-2 flex justify-center'}
+                            <button className={'bg-gray-800 text-white rounded-md w-full py-2 px-3 flex justify-center'}
                                     onClick={() => signOut({callbackUrl: '/'})}>Sign Out
                             </button>
                         ) : (
