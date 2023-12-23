@@ -24,7 +24,7 @@ const View = async ({
      * If the user is not authenticated, redirect to the login page.
      */
     if (!session) {
-        redirect('/login?callbackUrl=%2Fexport%2Fview%3Fyear%3D2023%26month%3D12');
+        redirect('/login?callbackUrl=%2Fview%3Fyear%3D2023%26month%3D12');
     }
 
     const yearParam = searchParams.year;

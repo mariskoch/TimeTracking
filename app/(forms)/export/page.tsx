@@ -17,7 +17,7 @@ const Export = () => {
         const yearAndMonth = (data.Year_and_Month as string).split("-");
         const year = yearAndMonth[0];
         const month = yearAndMonth[1];
-        router.push(`/export/view?year=${year}&month=${month}`);
+        router.push(`/view?year=${year}&month=${month}`);
     }
 
     return (
