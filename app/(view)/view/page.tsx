@@ -90,7 +90,7 @@ const View = async ({
 
     return (
         <div className='flex justify-center my-4'>
-            <div className="bg-white w-[794px] h-[1048px] p-0">
+            <div className="bg-white w-[794px] h-[1048px] p-0 overflow-x-auto mx-3">
                 <div className="text-xl mx-10 my-3">
                     {firstName} {lastName}, {monthName} {year}
                 </div>
