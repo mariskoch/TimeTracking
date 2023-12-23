@@ -88,16 +88,6 @@ export default function Home() {
                           className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center'>Go to
                         Exports</Link>
                 </div>
-                <button className={'bg-red-800 text-white rounded-md w-full mt-5 py-2 flex justify-center'}
-                        onClick={() => signIn()}>Sign in
-                </button>
-                <button className={'bg-gray-800 text-white rounded-md w-full mt-5 py-2 flex justify-center'}
-                        onClick={() => signOut({callbackUrl: '/'})}>Sign Out
-                </button>
-                <div className='w-full flex flex-col items-center justify-center'>
-                    <Link href='/register'
-                          className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center'>Register</Link>
-                </div>
             </div>
         </div>
     )
