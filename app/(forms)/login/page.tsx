@@ -25,7 +25,7 @@ const loginPage = () => {
         })
             .then((res) => {
                 if (res?.ok) {
-                    router.push(searchParams.get('callbackUrl') || '/');
+                    router.replace(searchParams.get('callbackUrl') || '/');
                 } else {
                     setFeedback({
                         state: 'Error',
