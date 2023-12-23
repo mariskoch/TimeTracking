@@ -17,10 +17,16 @@ const NavBar: React.FC = () => {
                             <IoHome size={'2em'}></IoHome>
                         </Link>
                     </div>
+                    {session.status === 'authenticated' && (
+                        <div className={'flex ml-auto items-center'}>
+                            Hello, {session.data.user.firstName} {session.data.user.lastName}
+                        </div>
+                    )}
                     <div className={'flex ml-auto mr-6 items-center'}>
                         {session.status === 'authenticated' ? (
-                            <button className={'bg-gray-800 text-white rounded-md w-full py-2 px-3 flex justify-center'}
-                                    onClick={() => signOut({callbackUrl: '/'})}>Sign Out
+                            <button
+                                className={'bg-gray-800 text-white rounded-md w-full py-2 px-3 flex justify-center'}
+                                onClick={() => signOut({callbackUrl: '/'})}>Sign Out
                             </button>
                         ) : (
                             <>

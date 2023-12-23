@@ -100,7 +100,7 @@ const exportPage = () => {
                 {feedback && (
                     <Feedback message={feedback.message} state={feedback.state}></Feedback>
                 )}
-                <div className={'flex items-center justify-center mt-3 text-gray-500'}>
+                <div className={'flex items-center justify-center mt-3 text-gray-500 mb-8'}>
                     Already have an account?<Link href={'/login'} className={'ml-1 underline'}>Login</Link>
                 </div>
             </div>
