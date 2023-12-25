@@ -6,9 +6,11 @@ import Link from 'next/link';
 import React, {useState} from 'react';
 import {getDateAsString, transformDataFormat} from "@/utils/DateUtils";
 import {formatTime} from "@/utils/TimeUtils";
+import {useSession} from "next-auth/react";
 
 export default function Home() {
     const [feedback, setFeedback] = useState<FeedbackProps>();
+    const session = useSession();
 
     function setError(): void {
         setFeedback({
@@ -61,31 +63,38 @@ export default function Home() {
 
     return (
         <div className='flex flex-col items-center h-screen'>
-            <div className='w-full sm:w-96 px-6 sm:px-0'>
+            <div className='w-full sm:w-96 px-6 sm:px-0 pb-6'>
                 <div className='flex items-center justify-center text-4xl mt-12 mb-3 w-full'>
                     Time Tracking
                 </div>
                 <div className='w-full'>
                     <form className='w-full' onSubmit={handleSubmit}>
-                        <CustomInput label='Date' placeholder='DD.MM.YYYY' value={getDateAsString()} type={"date"}></CustomInput>
+                        <CustomInput label='Date' placeholder='DD.MM.YYYY' value={getDateAsString()}
+                                     type={"date"}></CustomInput>
                         <CustomInput label='Start Time' placeholder='HH:MM' onChange={onlyNumbers}
                                      onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
                         <CustomInput label='End Time' placeholder='HH:MM' onChange={onlyNumbers}
                                      onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
                         <CustomInput label='Pause Duration' placeholder='HH:MM' onChange={onlyNumbers}
                                      onBlur={handleBlur} inputMode={"numeric"}></CustomInput>
-                        <button type='submit' className='bg-blue-600 text-white w-full mt-6 py-2 rounded-md'>Submit
+                        <button type='submit'
+                                className={`bg-blue-600 text-white w-full mt-6 py-2 rounded-md disabled:bg-gray-500`}
+                                disabled={session.status !== 'authenticated'}>
+                            {session.status === 'authenticated' ? 'Submit' : 'Login to track you time'}
                         </button>
                     </form>
                 </div>
                 {feedback && (
                     <Feedback message={feedback.message} state={feedback.state}></Feedback>
                 )}
-                <div className='w-full flex flex-col items-center justify-center'>
-                    <Link href='/export'
-                          className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center'>Go to
-                        Exports</Link>
-                </div>
+                {session.status === 'authenticated' && (
+                    <div className='w-full flex flex-col items-center justify-center'>
+                        <Link href='/export'
+                              className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center'>
+                            Go to Exports
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     )

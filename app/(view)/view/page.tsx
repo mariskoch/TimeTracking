@@ -8,22 +8,35 @@ import {
     getWeekdayOfDate, calculateWorkTime
 } from '@/utils/DateUtils';
 import {prisma} from '@/client';
+import {getServerSession} from "next-auth";
+import {options} from "@/app/api/auth/[...nextauth]/options";
+import {redirect} from "next/navigation";
 
 const View = async ({
                         searchParams,
                     }: {
     searchParams: { [key: string]: string | string[] | undefined }
 }) => {
+    const session = await getServerSession(options);
+
     const yearParam = searchParams.year;
     const year = Array.isArray(yearParam) ? parseInt(yearParam[0], 10) : parseInt(yearParam || '1970', 10);
 
     const monthParam = searchParams.month;
     const month = Array.isArray(monthParam) ? parseInt(monthParam[0], 10) : parseInt(monthParam || '1', 10);
 
+    /**
+     * This is an example of how to secure a page for viewing only by users who are authenticated.
+     * If the user is not authenticated, redirect to the login page.
+     */
+    if (!session) {
+        redirect(`/login?callbackUrl=%2Fview%3Fyear%3D${year}%26month%3D${month}`);
+    }
+
     const monthName = getMonthName(month);
 
-    const firstName = 'Johanna';
-    const lastName = 'Scherer';
+    const firstName = session.user.firstName;
+    const lastName = session.user.lastName;
 
     const gte = getFirstDayOfMonth(year, month);
     const lt = getFirstDayOfMonth(year, month + 1);
@@ -33,7 +46,8 @@ const View = async ({
             day: {
                 gte,
                 lt,
-            }
+            },
+            userId: session.user.id
         },
         orderBy: {
             day: "asc"
@@ -76,7 +90,7 @@ const View = async ({
 
     return (
         <div className='flex justify-center my-4'>
-            <div className="bg-white w-[794px] h-[1048px] p-0">
+            <div className="bg-white w-[794px] h-[1048px] p-0 overflow-x-auto mx-3">
                 <div className="text-xl mx-10 my-3">
                     {firstName} {lastName}, {monthName} {year}
                 </div>

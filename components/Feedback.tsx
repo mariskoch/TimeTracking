@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface FeedbackProps {
     state: "Success" | "Error",
     message: string

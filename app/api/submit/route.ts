@@ -1,6 +1,15 @@
 import { prisma } from "@/client";
+import {getServerSession} from "next-auth";
+import {options} from "@/app/api/auth/[...nextauth]/options";
 
 export async function POST(request: Request) {
+    const session = await getServerSession(options);
+    if (!session) {
+        return new Response(null, {
+            status: 401,
+        });
+    }
+
     const body = await request.json();
     const date = createDateFromString(body.Date);
     const startTime = createDateFromTimeString(body.Start_Time);
@@ -9,6 +18,7 @@ export async function POST(request: Request) {
 
     const workTimeEntry = await prisma.workTimeEntry.create({
         data: {
+            userId: session.user.id,
             day: date,
             start: startTime,
             end: endTime,
@@ -18,7 +28,6 @@ export async function POST(request: Request) {
 
     return new Response(null, {
         status: workTimeEntry ? 200 : 500,
-        
     });
 }
 
