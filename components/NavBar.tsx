@@ -1,11 +1,13 @@
 'use client';
 
-import React from "react";
+import React, {useState} from "react";
 import {IoHome} from "react-icons/io5";
 import Link from "next/link";
 import {signOut, useSession} from "next-auth/react";
+import {BarLoader} from "react-spinners";
 
 const NavBar: React.FC = () => {
+    const [isLoading, setLoading] = useState<boolean>(false);
     const session = useSession();
 
     return (
@@ -25,8 +27,24 @@ const NavBar: React.FC = () => {
                     <div className={'flex ml-auto mr-6 items-center'}>
                         {session.status === 'authenticated' ? (
                             <button
-                                className={'bg-gray-800 text-white rounded-md w-full py-2 px-3 flex justify-center'}
-                                onClick={() => signOut({callbackUrl: '/'})}>Sign Out
+                                disabled={isLoading!}
+                                className={'bg-gray-800 text-white rounded-md w-full py-2 px-3 flex justify-center h-[40px] disabled:bg-gray-400'}
+                                onClick={() => {
+                                    setLoading(true);
+                                    signOut({callbackUrl: '/'}).finally(() => setLoading(false));
+                                }}>
+                                {isLoading ? (
+                                    <BarLoader
+                                        color="rgba(200, 200, 200, 0.3)"
+                                        height={5}
+                                        loading={true}
+                                        speedMultiplier={2}
+                                        width={75}
+                                        className={'mt-[10px]'}
+                                    />
+                                ) : (
+                                    'Sign Out'
+                                )}
                             </button>
                         ) : (
                             <>
