@@ -1,8 +1,8 @@
 enum Weekday {
     Monday = 'Mon',
     Tuesday = 'Tue',
-    Thursday = 'Thu',
     Wednesday = 'Wed',
+    Thursday = 'Thu',
     Friday = 'Fri',
     Saturday = 'Sat',
     Sunday = 'Sun',

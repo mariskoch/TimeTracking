@@ -32,10 +32,10 @@ export function getWeekdayOfDate(year: number, month: number, day: number): Week
             return Weekday.Tuesday;
             break;
         case 3:
-            return Weekday.Thursday;
+            return Weekday.Wednesday;
             break;
         case 4:
-            return Weekday.Wednesday
+            return Weekday.Thursday;
             break;
         case 5:
             return Weekday.Friday;
