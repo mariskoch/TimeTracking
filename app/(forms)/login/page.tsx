@@ -6,15 +6,18 @@ import {signIn} from "next-auth/react";
 import {useRouter, useSearchParams} from "next/navigation";
 import Feedback, {FeedbackProps} from "@/components/Feedback";
 import Link from "next/link";
+import {BarLoader} from "react-spinners";
 
 const loginPage = () => {
     const [feedback, setFeedback] = useState<FeedbackProps>();
     const searchParams = useSearchParams();
     const router = useRouter();
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         router.refresh();
+        setLoading(true);
 
         const data = Object.fromEntries(new FormData(e.target as HTMLFormElement));
 
@@ -31,6 +34,7 @@ const loginPage = () => {
                         state: 'Error',
                         message: 'Invalid credentials.'
                     });
+                    setLoading(false);
                 }
             });
     }
@@ -44,7 +48,19 @@ const loginPage = () => {
                 <form onSubmit={submitHandler}>
                     <CustomInput label={'E-Mail'} placeholder={'mail@example.com'} type={'email'}></CustomInput>
                     <CustomInput label={'Password'} placeholder={'********'} type={'password'}></CustomInput>
-                    <button type='submit' className='bg-blue-600 text-white w-full mt-6 py-2 rounded-md'>Login
+                    <button type='submit' className='bg-blue-600 text-white w-full mt-6 py-2 rounded-md disabled:bg-blue-300' disabled={isLoading!}>
+                        {isLoading ? (
+                            <BarLoader
+                                color="rgba(33, 33, 33, 0.3)"
+                                height={5}
+                                loading={true}
+                                speedMultiplier={2}
+                                width={75}
+                                className={'mb-[3px]'}
+                            />
+                        ) : (
+                            'Login'
+                        )}
                     </button>
                 </form>
                 {feedback && (
