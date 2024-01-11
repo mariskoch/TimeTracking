@@ -16,29 +16,6 @@ export async function POST(request: Request) {
     const endTime = createDateFromTimeString(body.End_Time);
     const pauseDuration = createDateFromTimeString(body.Pause_Duration);
 
-    /*
-    const currentEntry = await prisma.workTimeEntry.findUnique({
-        where: {
-            day_userId: {
-                day: date,
-                userId: session.user.id
-            }
-        }
-    })
-    */
-
-    /*
-    const workTimeEntry = await prisma.workTimeEntry.create({
-        data: {
-            userId: session.user.id,
-            day: date,
-            start: startTime,
-            end: endTime,
-            pause: pauseDuration,
-        }
-    });
-    */
-
     const workTimeEntry = await prisma.workTimeEntry.upsert({
         where: {
             day_userId: {
