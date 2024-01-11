@@ -4,13 +4,15 @@ import React, {useState} from "react";
 import CustomInput from "@/components/CustomInput";
 import Feedback, {FeedbackProps} from "@/components/Feedback";
 import Link from "next/link";
+import {BarLoader} from "react-spinners";
 
 const exportPage = () => {
     const [feedback, setFeedback] = useState<FeedbackProps>();
+    const [isLoading, setLoading] = useState<boolean>(false);
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        setLoading(true);
         const data = Object.fromEntries(new FormData(e.target as HTMLFormElement));
 
         if (Object.values(data).some(value => value === '')) {
@@ -18,6 +20,7 @@ const exportPage = () => {
                 state: 'Error',
                 message: 'Please fill out all fields.'
             });
+            setLoading(false);
             return;
         }
         if (data['Password'] !== data['Repeat_Password']) {
@@ -25,6 +28,7 @@ const exportPage = () => {
                 state: 'Error',
                 message: 'Passwords do not match.'
             });
+            setLoading(false);
             return;
         }
 
@@ -52,24 +56,28 @@ const exportPage = () => {
                         message: 'Account created successfully.'
                     });
                     (e.target as HTMLFormElement).reset();
+                    setLoading(false);
                 } else {
                     if (data.status === 409) {
                         setFeedback({
                             state: 'Error',
                             message: 'An account with this email already exists.'
                         });
+                        setLoading(false);
                         return;
                     } else if (data.status === 400) {
                         setFeedback({
                             state: 'Error',
                             message: 'Please fill out all fields.'
                         });
+                        setLoading(false);
                         return;
                     }
                     setFeedback({
                         state: 'Error',
                         message: 'Something went wrong! Try again later.'
                     });
+                    setLoading(false);
                 }
             })
             .catch(error => {
@@ -94,7 +102,21 @@ const exportPage = () => {
                                  type={'password'}></CustomInput>
                     <CustomInput label={'Repeat Password'} placeholder={'Your-Strong-Password-Again'}
                                  type={'password'}></CustomInput>
-                    <button type='submit' className='bg-blue-600 text-white w-full mt-6 py-2 rounded-md'>Register
+                    <button type='submit'
+                            className='bg-blue-600 text-white w-full mt-6 py-2 rounded-md disabled:bg-blue-300'
+                            disabled={isLoading!}>
+                        {isLoading ? (
+                            <BarLoader
+                                color="rgba(33, 33, 33, 0.3)"
+                                height={5}
+                                loading={true}
+                                speedMultiplier={2}
+                                width={75}
+                                className={'mb-[3px]'}
+                            />
+                        ) : (
+                            'Register'
+                        )}
                     </button>
                 </form>
                 {feedback && (

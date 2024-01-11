@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
                                 className={'bg-gray-800 text-white rounded-md w-full py-2 px-3 flex justify-center h-[40px] disabled:bg-gray-400'}
                                 onClick={() => {
                                     setLoading(true);
-                                    signOut({callbackUrl: '/'}).finally(() => setLoading(false));
+                                    signOut({callbackUrl: '/'});
                                 }}>
                                 {isLoading ? (
                                     <BarLoader
