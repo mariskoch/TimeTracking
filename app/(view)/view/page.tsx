@@ -111,7 +111,7 @@ const View = async ({
                         <tbody>
                         {tableData.map((rowData, index) => {
                             return (
-                                <tr key={index} className={`border-b ${rowData.weekday === Weekday.Sunday && TimeHoursMinutes(rowData.startTime) === '00:00' ? 'bg-gray-100' : ''}`}>
+                                <tr key={index} className={`border-b ${rowData.weekday === Weekday.Sunday && TimeHoursMinutes(rowData.startTime) === '00:00' ? 'bg-gray-300' : ''}`}>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.day.getDate()}</td>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.weekday}</td>
                                     <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.startTime)}</td>
