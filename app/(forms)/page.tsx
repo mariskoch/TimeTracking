@@ -50,9 +50,17 @@ export default function Home() {
                         message: 'Time submitted successfully.'
                     });
                     (event.target as HTMLFormElement).reset();
-                    // set value of the date field to one day later
+
+                    // moving the day forward by one
                     const date = new Date(chosenDate as string);
                     date.setDate(date.getDate() + 1);
+
+                    // if the day is a sunday, move it to monday
+                    if (date.getDay() === 0) {
+                        date.setDate(date.getDate() + 1);
+                    }
+
+                    // set the date input
                     (document.getElementById('Date') as HTMLInputElement).value = getDateAsString(date);
                     setSubmitLoading(false);
                 } else {
