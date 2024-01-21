@@ -114,10 +114,18 @@ const View = async ({
                                 <tr key={index} className={`border-b ${rowData.weekday === Weekday.Sunday && TimeHoursMinutes(rowData.startTime) === '00:00' ? 'bg-gray-300' : ''}`}>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.day.getDate()}</td>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.weekday}</td>
-                                    <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.startTime)}</td>
-                                    <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.endTime)}</td>
-                                    <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.pauseDuration)}</td>
-                                    <td className='whitespace-nowrap px-6 py-1'>{calculateWorkTime(rowData.startTime, rowData.endTime, rowData.pauseDuration)}</td>
+                                    <td className='whitespace-nowrap px-6 py-1'>
+                                        {TimeHoursMinutes(rowData.startTime) === '00:00' && TimeHoursMinutes(rowData.endTime) === '00:00' ? '' : TimeHoursMinutes(rowData.startTime)}
+                                    </td>
+                                    <td className='whitespace-nowrap px-6 py-1'>
+                                        {TimeHoursMinutes(rowData.startTime) === '00:00' && TimeHoursMinutes(rowData.endTime) === '00:00' ? '' : TimeHoursMinutes(rowData.endTime)}
+                                    </td>
+                                    <td className='whitespace-nowrap px-6 py-1'>
+                                        {TimeHoursMinutes(rowData.startTime) === '00:00' && TimeHoursMinutes(rowData.endTime) === '00:00' ? '' : TimeHoursMinutes(rowData.pauseDuration)}
+                                    </td>
+                                    <td className='whitespace-nowrap px-6 py-1'>
+                                        {TimeHoursMinutes(rowData.startTime) === '00:00' && TimeHoursMinutes(rowData.endTime) === '00:00' ? '' : calculateWorkTime(rowData.startTime, rowData.endTime, rowData.pauseDuration)}
+                                    </td>
                                 </tr>
                             );
                         })}
