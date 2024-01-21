@@ -1,14 +1,16 @@
 # ToDo
 
-- wenn eine Eingabe erfolgt ist, soll das Datum auf den Folgetag springen Sonntage direkt überspringen
+- [ ] Sonntage in Exporten ohne Stunden und grau hinterlegen → außer es ist ein Stunden-Eintrag drin
 
-- Sonntage in Exporten ohne Stunden und grau hinterlegen → außer es ist ein Stunden-Eintrag drin
+- [ ] Kommentarfeld (freitext)
 
-- Kommentarfeld (freitext)
+- [ ] Toast darüber, was gerade submittet wurde
 
-- Toast darüber, was gerade submittet wurde
+- [ ] Deutsche Version
 
-- Deutsche Version
+
+
+- [X] wenn eine Eingabe erfolgt ist, soll das Datum auf den Folgetag springen Sonntage direkt überspringen
 
 # Useful links
 

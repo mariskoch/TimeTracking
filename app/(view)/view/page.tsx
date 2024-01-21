@@ -1,16 +1,18 @@
 import ExportTableSchema from '@/utils/ExportTableSchema';
 import {
-    TimeHoursMinutes,
     areDatesOnSameDay,
+    calculateWorkTime,
     getFirstDayOfMonth,
     getMonthName,
     getNumberOfDaysInMonth,
-    getWeekdayOfDate, calculateWorkTime
+    getWeekdayOfDate,
+    TimeHoursMinutes
 } from '@/utils/DateUtils';
 import {prisma} from '@/client';
 import {getServerSession} from "next-auth";
 import {options} from "@/app/api/auth/[...nextauth]/options";
 import {redirect} from "next/navigation";
+import Weekday from "@/utils/Weekdays";
 
 const View = async ({
                         searchParams,
@@ -109,7 +111,7 @@ const View = async ({
                         <tbody>
                         {tableData.map((rowData, index) => {
                             return (
-                                <tr key={index} className='border-b'>
+                                <tr key={index} className={`border-b ${rowData.weekday === Weekday.Sunday && TimeHoursMinutes(rowData.startTime) === '00:00' ? 'bg-gray-100' : ''}`}>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.day.getDate()}</td>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.weekday}</td>
                                     <td className='whitespace-nowrap px-6 py-1'>{TimeHoursMinutes(rowData.startTime)}</td>
