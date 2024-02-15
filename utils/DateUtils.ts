@@ -115,8 +115,8 @@ export function isValidYearMonthFormat(input: string): boolean {
     return regex.test(input);
 }
 
-export function getDateAsString(): string {
-    const date = new Date;
+export function getDateAsString(input?: Date): string {
+    const date = input || new Date();
     const day = date.getUTCDate();
     const month = date.getUTCMonth() + 1;
     const year = date.getUTCFullYear();

@@ -32,6 +32,8 @@ export default function Home() {
         setSubmitLoading(true);
         const data = Object.fromEntries(new FormData(event.target as HTMLFormElement));
 
+        const chosenDate = data['Date'];
+
         data['Date'] = transformDataFormat(data['Date'] as string);
 
         fetch('/api/submit', {
@@ -41,13 +43,25 @@ export default function Home() {
             },
             body: JSON.stringify(data)
         })
-            .then(data => {
-                if (data.ok) {
+            .then(res => {
+                if (res.ok) {
                     setFeedback({
                         state: 'Success',
                         message: 'Time submitted successfully.'
                     });
                     (event.target as HTMLFormElement).reset();
+
+                    // moving the day forward by one
+                    const date = new Date(chosenDate as string);
+                    date.setDate(date.getDate() + 1);
+
+                    // if the day is a sunday, move it to monday
+                    if (date.getDay() === 0) {
+                        date.setDate(date.getDate() + 1);
+                    }
+
+                    // set the date input
+                    (document.getElementById('Date') as HTMLInputElement).value = getDateAsString(date);
                     setSubmitLoading(false);
                 } else {
                     setError()
