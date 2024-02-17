@@ -13,19 +13,19 @@ import {getServerSession} from "next-auth";
 import {options} from "@/app/api/auth/[...nextauth]/options";
 import {redirect} from "next/navigation";
 import Weekday from "@/utils/Weekdays";
+import {getDictionary} from "@/app/[lang]/dictionaries";
+import {locale} from "@/middleware";
 
-const View = async ({
-                        searchParams,
-                    }: {
-    searchParams: { [key: string]: string | string[] | undefined }
-}) => {
+const View = async ({searchParams, params: {lang}}: { searchParams: { [key: string]: string | string[] | undefined }, params: {lang: string} }) => {
     const session = await getServerSession(options);
-
     const yearParam = searchParams.year;
     const year = Array.isArray(yearParam) ? parseInt(yearParam[0], 10) : parseInt(yearParam || '1970', 10);
 
     const monthParam = searchParams.month;
     const month = Array.isArray(monthParam) ? parseInt(monthParam[0], 10) : parseInt(monthParam || '1', 10);
+
+    const dict = await getDictionary(lang as locale);
+    console.log(dict.welcome);
 
     /**
      * This is an example of how to secure a page for viewing only by users who are authenticated.
@@ -111,7 +111,8 @@ const View = async ({
                         <tbody>
                         {tableData.map((rowData, index) => {
                             return (
-                                <tr key={index} className={`border-b ${rowData.weekday === Weekday.Sunday && TimeHoursMinutes(rowData.startTime) === '00:00' ? 'bg-gray-300' : ''}`}>
+                                <tr key={index}
+                                    className={`border-b ${rowData.weekday === Weekday.Sunday && TimeHoursMinutes(rowData.startTime) === '00:00' ? 'bg-gray-300' : ''}`}>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.day.getDate()}</td>
                                     <td className='whitespace-nowrap px-6 py-1'>{rowData.weekday}</td>
                                     <td className='whitespace-nowrap px-6 py-1'>

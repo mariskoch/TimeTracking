@@ -51,7 +51,7 @@ const Export = () => {
                 </form>
                 {session.status === 'authenticated' && (
                     <div className='w-full flex flex-col items-center justify-center'>
-                        <Link href='/'
+                        <Link href='/public'
                               className='bg-blue-900 text-white rounded-md w-full mt-5 py-2 flex justify-center h-[40px] disabled:bg-gray-500'
                               onClick={() => setExportLoading(true)}>
                             {isExportLoading ? (

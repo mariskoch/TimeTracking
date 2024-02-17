@@ -37,8 +37,6 @@ export async function POST(request: Request) {
         }
     });
 
-    console.log(workTimeEntry);
-
     return new Response(null, {
         status: workTimeEntry ? 200 : 500,
     });
