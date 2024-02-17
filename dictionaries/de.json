@@ -1,3 +1,46 @@
 {
-  "welcome": "Willkommen im Schuljahr 2019-2020!"
+  "view": {
+    "table": {
+      "date": "Datum",
+      "weekday": "Wochentag",
+      "startTime": "Startzeit",
+      "endTime": "Endzeit",
+      "pause": "Pause",
+      "workTime": "Arbeitszeit"
+    },
+    "months": {
+      "january": "Januar",
+      "february": "Februar",
+      "march": "März",
+      "april": "April",
+      "may": "Mai",
+      "june": "Juni",
+      "july": "Juli",
+      "august": "August",
+      "september": "September",
+      "october": "Oktober",
+      "november": "November",
+      "december": "Dezember"
+    },
+    "weekdays": {
+      "long": {
+        "monday": "Montag",
+        "tuesday": "Dienstag",
+        "wednesday": "Mittwoch",
+        "thursday": "Donnerstag",
+        "friday": "Freitag",
+        "saturday": "Samstag",
+        "sunday": "Sonntag"
+      },
+      "short": {
+        "monday": "Mo",
+        "tuesday": "Di",
+        "wednesday": "Mi",
+        "thursday": "Do",
+        "friday": "Fr",
+        "saturday": "Sa",
+        "sunday": "So"
+      }
+    }
+  }
 }

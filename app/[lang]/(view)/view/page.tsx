@@ -13,8 +13,6 @@ import {getServerSession} from "next-auth";
 import {options} from "@/app/api/auth/[...nextauth]/options";
 import {redirect} from "next/navigation";
 import Weekday from "@/utils/Weekdays";
-import {getDictionary} from "@/app/[lang]/dictionaries";
-import {locale} from "@/middleware";
 
 const View = async ({searchParams, params: {lang}}: { searchParams: { [key: string]: string | string[] | undefined }, params: {lang: string} }) => {
     const session = await getServerSession(options);
@@ -23,9 +21,6 @@ const View = async ({searchParams, params: {lang}}: { searchParams: { [key: stri
 
     const monthParam = searchParams.month;
     const month = Array.isArray(monthParam) ? parseInt(monthParam[0], 10) : parseInt(monthParam || '1', 10);
-
-    const dict = await getDictionary(lang as locale);
-    console.log(dict.welcome);
 
     /**
      * This is an example of how to secure a page for viewing only by users who are authenticated.

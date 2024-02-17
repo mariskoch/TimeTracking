@@ -1,3 +1,46 @@
 {
-  "welcome": "Welcome to the 2019-2020 school year!"
+  "view": {
+    "table": {
+      "date": "Date",
+      "weekday": "Weekday",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "pause": "Pause Duration",
+      "workTime": "Work Time"
+    },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "Dezember"
+    },
+    "weekdays": {
+      "long": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+      },
+      "short": {
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Thu",
+        "friday": "Fri",
+        "saturday": "Sat",
+        "sunday": "Sun"
+      }
+    }
+  }
 }
