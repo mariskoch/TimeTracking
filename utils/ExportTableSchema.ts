@@ -1,7 +1,5 @@
-import Weekday from "./Weekdays";
-
 export default interface ExportTableSchema {
-    weekday: Weekday,
+    weekday: string,
     day: Date,
     startTime: Date,
     endTime: Date,
